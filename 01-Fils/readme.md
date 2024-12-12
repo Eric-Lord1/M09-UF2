@@ -12,25 +12,25 @@ Hem configurat les prioritats dels fils amb `setPriority()`. Tot i que "Pepe" t√
 Termina thread main
 Juan 1
 Juan 2
-Juan 3
 Pepe 1
+Juan 3
 Pepe 2
-Pepe 3
 Juan 4
 Juan 5
+Pepe 3
 Pepe 4
 Pepe 5
 Pepe 6
-Juan 6
 Pepe 7
 Pepe 8
 Pepe 9
+Juan 6
 Juan 7
 Juan 8
 Juan 9
-Juan 10
 Termina el fil Juan
 Termina el fil Pepe
+
 ```
 
 ### Comportament 2
@@ -47,7 +47,6 @@ Pepe 6
 Pepe 7
 Pepe 8
 Pepe 9
-Pepe 10
 Juan 1
 Juan 2
 Juan 3
@@ -57,9 +56,9 @@ Juan 6
 Juan 7
 Juan 8
 Juan 9
-Juan 10
 Termina el fil Pepe
 Termina el fil Juan
+
 ```
 
 ### Comportament 3
