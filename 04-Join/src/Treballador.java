@@ -39,10 +39,9 @@ public class Treballador extends Thread {
     public void run() {
         while (edat_actual < edat_fi_treball) {
             try {
-                edat_actual++;
                 cobra();
                 pagaImpostos();
-
+                edat_actual++;
                 Thread.sleep(rnd.nextInt(10));
             } catch (InterruptedException e) {
                 e.printStackTrace();
