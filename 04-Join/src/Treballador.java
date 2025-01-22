@@ -24,7 +24,7 @@ public class Treballador extends Thread {
     }
 
     public void pagaImpostos() {
-        cobrat -= ((sou_anual_brut / 12) * 0.24);
+        cobrat -= ((sou_anual_brut / 12f) * 0.24f);
     }
 
     public float getCobrat() {
@@ -37,12 +37,15 @@ public class Treballador extends Thread {
 
     @Override
     public void run() {
+        edat_actual = edat_inici_treball;
         while (edat_actual < edat_fi_treball) {
             try {
-                cobra();
-                pagaImpostos();
+                for (int i = 0; i < 12; i++) {
+                    cobra();
+                    pagaImpostos();
+                    Thread.sleep(rnd.nextInt(100));
+                }
                 edat_actual++;
-                Thread.sleep(rnd.nextInt(10));
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
