@@ -1,7 +1,7 @@
 public class Compte {
 
     private static Compte compte;
-    private int saldo;
+    private float saldo;
 
     private Compte() {
         saldo = 0;
@@ -15,11 +15,11 @@ public class Compte {
         return compte;
     }
 
-    public int getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(int saldo) {
+    public void setSaldo(float saldo) {
         this.saldo = saldo;
     }
 

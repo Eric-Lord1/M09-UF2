@@ -26,15 +26,9 @@ public class Associacio {
             e.printStackTrace();
         }
     }
-    
+
     public void mostraBalancComptes() {
-        float balanc = 0f;
-
-        for (int i = 0; i < soci.length; i++) {
-            balanc = soci[i].compte.getSaldo();
-        }
-
-        System.out.println("Saldo: " + balanc);
+        System.out.println("Saldo: " + Soci.compte.getSaldo());
     }
 
     public static void main(String[] args) {
