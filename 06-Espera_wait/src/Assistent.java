@@ -15,7 +15,7 @@ public class Assistent extends Thread {
     public void gestorReserva() {
         synchronized (esdeveniment) {
             try {
-                if (Math.random() < 0.5) {
+                if (Math.random() < 0.3) {
                     if (this.esdeveniment.ferReserva(this)) {
                         System.out.println(this.getName() + " ha fet una reserva. Places disponibles: "
                                 + this.esdeveniment.placesDisponibles);
