@@ -1,25 +1,22 @@
-public class Forquilla {
-
+class Forquilla {
+    
     public final int LLIURE = -1;
+    private int propietari;
 
-    public int propietari;
-
-    public Forquilla (int propietari) {
+    public Forquilla(int propietari) {
         this.propietari = propietari;
     }
 
-    public int getLLIURE() {
-        return LLIURE;
-    }
-
-    public int getPropietari() {
+    public synchronized int getPropietari() {
         return propietari;
     }
 
-    public void setPropietari(int propietari) {
+    public synchronized void setPropietari(int propietari) {
         this.propietari = propietari;
     }
 
-    
-
+    @Override
+    public String toString() {
+        return "Forquilla";
+    }
 }
