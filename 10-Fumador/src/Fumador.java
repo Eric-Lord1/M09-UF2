@@ -5,7 +5,6 @@ public class Fumador extends Thread {
     private Paper paper;
     private Llumi llumi;
     private int numFumades = 0;
-    private static int fumadorsAcabats = 0;
 
     public Fumador(Estanc estanc, int id) {
         this.estanc = estanc;
@@ -13,42 +12,45 @@ public class Fumador extends Thread {
     }
 
     public void compraTabac() {
-        synchronized (estanc) {
-            estanc.venTabac();
+        try {
+            tabac = estanc.venTabac();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     public void compraPaper() {
-        synchronized (estanc) {
-            estanc.venPaper();
+        try {
+            paper = estanc.venPaper();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     public void compraLlumi() {
-        synchronized (estanc) {
-            estanc.venLlumi();
+        try {
+            llumi = estanc.venLlumi();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
     public void fuma() {
-
         synchronized (estanc) {
-
             if (tabac != null && paper != null && llumi != null) {
                 System.out.println("Fumador " + id + " està fumant...");
                 tabac = null;
                 paper = null;
                 llumi = null;
                 numFumades++;
-                estanc.notifyAll();
+                estanc.notifyAll();  
             }
 
             try {
-                Thread.sleep(500 + new java.util.Random().nextInt(500));
+                Thread.sleep(500 + new java.util.Random().nextInt(500)); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
@@ -59,7 +61,6 @@ public class Fumador extends Thread {
             compraLlumi();
             fuma();
         }
-
     }
-
 }
+

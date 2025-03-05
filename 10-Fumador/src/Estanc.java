@@ -2,11 +2,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Estanc extends Thread {
-
     ArrayList<Tabac> tabacs;
     ArrayList<Paper> papers;
     ArrayList<Llumi> llumis;
-    
     Random random = new Random();
     boolean tancat = false;
 
@@ -16,63 +14,58 @@ public class Estanc extends Thread {
         this.llumis = new ArrayList<>();
     }
 
-    public void nouSubministrament() {
+    public synchronized void nouSubministrament() {
         switch (random.nextInt(3)) {
             case 0 -> addTabac();
             case 1 -> addPaper();
             case 2 -> addLlumi();
         }
+        notifyAll();
     }
 
-    public void addTabac() {
+    public synchronized void addTabac() {
         tabacs.add(new Tabac());
         System.out.println("Afegint Tabac");
     }
 
-    public void addPaper() {
+    public synchronized void addPaper() {
         papers.add(new Paper());
         System.out.println("Afegint Paper");
     }
 
-    public void addLlumi() {
+    public synchronized void addLlumi() {
         llumis.add(new Llumi());
         System.out.println("Afegint Llumins");
     }
 
-    public Tabac venTabac() {
-        if (!tabacs.isEmpty()) {
-            Tabac tabac = tabacs.remove(tabacs.size() - 1);
-            System.out.println("Venent Tabac");
-            return tabac;
-        } else {
-            System.out.println("No hi ha tabac disponible.");
-            return null;
+    public synchronized Tabac venTabac() throws InterruptedException {
+        while (tabacs.isEmpty()) {
+            wait();
         }
+        Tabac tabac = tabacs.remove(tabacs.size() - 1);
+        System.out.println("Venent Tabac");
+        return tabac;
     }
 
-    public Paper venPaper() {
-        if (!papers.isEmpty()) {
-            Paper paper = papers.remove(papers.size() - 1);
-            System.out.println("Venent Paper");
-            return paper;
-        } else {
-            System.out.println("No hi ha paper disponible.");
-            return null;
+    public synchronized Paper venPaper() throws InterruptedException {
+        while (papers.isEmpty()) {
+            wait();
         }
+        Paper paper = papers.remove(papers.size() - 1);
+        System.out.println("Venent Paper");
+        return paper;
     }
 
-    public Llumi venLlumi() {
-        if (!llumis.isEmpty()) {
-            Llumi llumi = llumis.remove(llumis.size() - 1);
-            System.out.println("Venent Llumins");
-            return llumi;
-        } else {
-            System.out.println("No hi ha llumins disponibles.");
-            return null;
+    public synchronized Llumi venLlumi() throws InterruptedException {
+        while (llumis.isEmpty()) {
+            wait();
         }
+        Llumi llumi = llumis.remove(llumis.size() - 1);
+        System.out.println("Venent Llumins");
+        return llumi;
     }
 
-    public void tancarEstanc() {
+    public synchronized void tancarEstanc() {
         tancat = true;
         System.out.println("Estanc tancat.");
     }
@@ -89,3 +82,4 @@ public class Estanc extends Thread {
         }
     }
 }
+
